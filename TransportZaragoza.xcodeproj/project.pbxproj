@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -163,7 +163,6 @@
 			children = (
 				BB39CDD4764A2922BEDB742D /* BusJourneyTests.swift */,
 			);
-			name = TransportZaragozaUITests;
 			path = TransportZaragozaUITests;
 			sourceTree = "<group>";
 		};
@@ -172,7 +171,6 @@
 			children = (
 				1923890EB2DBCF6EF160D2D8 /* BusFlowTests.swift */,
 			);
-			name = TransportZaragozaTests;
 			path = TransportZaragozaTests;
 			sourceTree = "<group>";
 		};
@@ -290,12 +288,12 @@
 				5C5056B32B03F18F00C64B4C /* NetworkClient */,
 				5C5056B42B03F19A00C64B4C /* Data */,
 				5C5056B12B03F14900C64B4C /* Features */,
+				681E06240D916BB372720A0D /* Fixtures */,
 				5C5056B02B03F13E00C64B4C /* Entities */,
 				5C5756CF2B028F0000A8680E /* TransportZaragozaApp.swift */,
 				5C5056C12B03F94000C64B4C /* Coordinator.swift */,
 				5C5756D12B028F0000A8680E /* ContentView.swift */,
 				5C5756D32B028F0100A8680E /* Assets.xcassets */,
-				681E06240D916BB372720A0D /* Fixtures */,
 			);
 			path = TransportZaragoza;
 			sourceTree = "<group>";
@@ -403,7 +401,6 @@
 				C31A74575A5FBDB94CC55120 /* bus-invalid.json */,
 				7D6877E8ACE65D6DDC4B7F42 /* bus-rural.json */,
 			);
-			name = Fixtures;
 			path = Fixtures;
 			sourceTree = "<group>";
 		};
@@ -495,7 +492,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					5C5756CB2B028F0000A8680E = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -641,7 +638,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -661,7 +662,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -731,6 +736,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -787,6 +793,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -836,7 +843,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TransportZaragoza/Preview Content\"";
 				DEVELOPMENT_TEAM = 4SD9GF7ZSL;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_SOURCE_FILE_NAMES = "FixtureTransport.swift bus-stops.json bus-arrivals.json bus-rural.json bus-invalid.json tram-stops.json";
+				EXCLUDED_SOURCE_FILE_NAMES = (
+					FixtureTransport.swift,
+					"bus-stops.json",
+					"bus-arrivals.json",
+					"bus-rural.json",
+					"bus-invalid.json",
+					"tram-stops.json",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -866,7 +880,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -885,7 +903,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
