@@ -1,48 +1,32 @@
 import Foundation
+import Combine
+import OSLog
 
-class BusLinesViewModel: ObservableObject {
-    
-    @Published var busLines: [String: [BusStop]] = [:]
-    @Published var isLoading = false
-    @Published var error: Error?
-    
-    private let busStopsRepository: BusStopsRepository
-    
-    init(busStopsRepository: BusStopsRepository) {
-        self.busStopsRepository = busStopsRepository
-    }
-    
-    @MainActor
-    func getBusLines() async {
-        isLoading = true
+@MainActor
+final class BusLinesViewModel: ObservableObject {
+    @Published private(set) var state: LoadState<[String]> = .idle
+    private let repository: any BusStopsProviding
+    private var requestID: UUID?
+
+    init(busStopsRepository: any BusStopsProviding) { repository = busStopsRepository }
+
+    func getBusLines(updateData: Bool = false) async {
+        let id = UUID()
+        requestID = id
+        state = .loading
         do {
-            let busStopsList = try await busStopsRepository.getBusStops()
-            var linesDictionary = [String: [BusStop]]()
-            
-            for busStop in busStopsList {
-                let lines = extractLines(from: busStop.title)
-                for line in lines {
-                    linesDictionary[line, default: []].append(busStop)
-                }
+            let stops = try await repository.getBusStops(updateData: updateData)
+            try Task.checkCancellation()
+            guard requestID == id else { return }
+            let lines = Set(stops.flatMap { $0.title.extractLines() }).sorted {
+                $0.localizedStandardCompare($1) == .orderedAscending
             }
-            busLines = linesDictionary
+            state = lines.isEmpty ? .empty : .content(lines)
         } catch {
-            self.error = error
-            print("Error al obtener las líneas de autobús:", error)
+            guard requestID == id else { return }
+            if error is CancellationError || Task.isCancelled { state = .idle; return }
+            Logger(subsystem: "TransportZaragoza", category: "BusLines").error("Loading failed: \(String(reflecting: error), privacy: .private)")
+            state = .failed
         }
-        isLoading = false
     }
-
-    private func extractLines(from title: String) -> [String] {
-        let pattern = "Líneas: ([A-Za-z0-9, ]+)"
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
-        
-        let results = regex.matches(in: title, range: NSRange(title.startIndex..., in: title))
-        guard let match = results.first else { return [] }
-        
-        let lineNumbersRange = Range(match.range(at: 1), in: title)!
-        let lineNumbers = title[lineNumbersRange]
-        return lineNumbers.components(separatedBy: ", ").map { $0.trimmingCharacters(in: .whitespaces) }
-    }
-    
 }

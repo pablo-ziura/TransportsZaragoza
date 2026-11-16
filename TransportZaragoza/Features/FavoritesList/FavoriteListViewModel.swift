@@ -1,6 +1,8 @@
 import Foundation
+import Combine
 
-class FavoriteListViewModel: ObservableObject {
+@MainActor
+final class FavoriteListViewModel: ObservableObject {
     
     @Published var favoriteTramStops: [TramStop] = []
     @Published var favoriteBusStops: [BusStop] = []
@@ -15,14 +17,12 @@ class FavoriteListViewModel: ObservableObject {
         self.busStopsRepository = busStopsRepository
     }
     
-    @MainActor
     func getFavoritesTramStops() async {
-        favoriteTramStops = tramStopsRepository.getFavorites()
+        favoriteTramStops = await tramStopsRepository.getFavorites()
     }
     
-    @MainActor
     func getFavoritesBusStops() async {
-        favoriteBusStops = busStopsRepository.getFavorites()
+        favoriteBusStops = await busStopsRepository.getFavorites()
     }
     
 }

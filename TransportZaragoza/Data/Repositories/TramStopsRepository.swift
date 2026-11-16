@@ -1,51 +1,27 @@
 import Foundation
 
-class TramStopsRepository {
-    
-    private let remoteService: LiveTramStopsRemoteService
+actor TramStopsRepository {
+    private let remoteService: any TramStopsRemoteService
     private let localService: UserDefaultsTramStopsLocalService
-    private var error: Error?
-    
-    init(remoteService: LiveTramStopsRemoteService, localService: UserDefaultsTramStopsLocalService) {
+    private var catalogRequestID: UUID?
+
+    init(remoteService: any TramStopsRemoteService, defaultsSuiteName: String? = nil) {
         self.remoteService = remoteService
-        self.localService = localService
+        localService = UserDefaultsTramStopsLocalService(suiteName: defaultsSuiteName)
     }
-    
+
     func getTramStops(updateData: Bool = false) async throws -> [TramStop] {
-        if updateData {
-            do {
-                let remoteTramStops = try await remoteService.getTramStops()
-                try localService.save(tramStops: remoteTramStops)
-                return remoteTramStops
-            } catch let error {
-                self.error = error
-                print("Error al cargar paradas de tranvía desde remoto:", error)
-                throw error
-            }
-        } else {
-            let localTramStops = try localService.getTramStops()
-            if !localTramStops.isEmpty {
-                return localTramStops
-            }
-            let remoteTramStops = try await remoteService.getTramStops()
-            try localService.save(tramStops: remoteTramStops)
-            return remoteTramStops
-        }
+        if !updateData, let cached = try? localService.getTramStops(), !cached.isEmpty { return cached }
+        let requestID = UUID()
+        catalogRequestID = requestID
+        let stops = try await remoteService.getTramStops()
+        try Task.checkCancellation()
+        if catalogRequestID == requestID { try localService.save(tramStops: stops) }
+        return stops
     }
-    
-    func isFavorite(tramStop: TramStop) -> Bool {
-        return localService.isFavorite(tramStop: tramStop)
-    }
-    
-    func addFavorite(tramStop: TramStop) {
-        localService.addFavorite(tramStop: tramStop)
-    }
-    
-    func removeFavorite(tramStop: TramStop) {
-        localService.removeFavorite(tramStop: tramStop)
-    }
-    
-    func getFavorites() -> [TramStop] {
-        return localService.getFavorites()
-    }
+
+    func isFavorite(tramStop: TramStop) -> Bool { localService.isFavorite(tramStop: tramStop) }
+    func addFavorite(tramStop: TramStop) { localService.addFavorite(tramStop: tramStop) }
+    func removeFavorite(tramStop: TramStop) { localService.removeFavorite(tramStop: tramStop) }
+    func getFavorites() -> [TramStop] { localService.getFavorites() }
 }

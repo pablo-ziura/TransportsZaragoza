@@ -1,5 +1,8 @@
 import Foundation
 
-struct APIResponse<T: Decodable>: Decodable {
-    let result: [T]
+struct APIResponse<Item: Decodable & Sendable>: Decodable, Sendable {
+    let totalCount: Int
+    let start: Int
+    let rows: Int
+    let result: [Item]
 }

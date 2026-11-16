@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct TransportZaragozaApp: App {
     
-    let coordinator = Coordinator()
+    @StateObject private var coordinator = Coordinator()
 
     var body: some Scene {
         WindowGroup {

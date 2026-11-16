@@ -1,5 +1,5 @@
 import Foundation
 
-protocol TramStopsRemoteService {
+protocol TramStopsRemoteService: Sendable {
     func getTramStops() async throws -> [TramStop]
 }

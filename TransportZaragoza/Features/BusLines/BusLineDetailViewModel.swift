@@ -1,63 +1,67 @@
 import Foundation
+import Combine
+import OSLog
 
-class BusLineDetailViewModel: ObservableObject {
-    
-    @Published var busStops: [BusStop] = []
-    @Published var busStopData: BusStopData?
-    @Published var isLoading = false
-    @Published var error: Error?
-    
-    @Published var showErrorAlertForStops = false
-    @Published var showErrorAlertForStopDetails = false
-    
-    private let busStopsRepository: BusStopsRepository
+@MainActor
+final class BusLineDetailViewModel: ObservableObject {
+    @Published private(set) var stopsState: LoadState<[BusStop]> = .idle
+    @Published private(set) var arrivalsState: LoadState<[ArrivalBus]> = .idle
+    private let repository: any BusStopsProviding
     private let busLine: String
-    
-    init(busStopsRepository: BusStopsRepository, busLine: String) {
-        self.busStopsRepository = busStopsRepository
+    private var stopsRequestID: UUID?
+    private var arrivalsRequestID: UUID?
+
+    init(busStopsRepository: any BusStopsProviding, busLine: String) {
+        repository = busStopsRepository
         self.busLine = busLine
     }
-    
-    @MainActor
+
     func getBusStopsByLine() async {
-        isLoading = true
+        let id = UUID()
+        stopsRequestID = id
+        stopsState = .loading
         do {
-            busStops = try await busStopsRepository.getBusStopsByLine(busLine: busLine)
-            showErrorAlertForStops = false
+            let stops = try await repository.getBusStops(updateData: false)
+                .filter { $0.title.extractLines().contains(busLine) }
+                .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+            try Task.checkCancellation()
+            guard stopsRequestID == id else { return }
+            stopsState = stops.isEmpty ? .empty : .content(stops)
         } catch {
-            self.error = error
-            print("Error al obtener las paradas detalladas para la línea \(busLine):", error)
-            showErrorAlertForStops = true
+            guard stopsRequestID == id else { return }
+            if error is CancellationError || Task.isCancelled { stopsState = .idle; return }
+            log(error)
+            stopsState = .failed
         }
-        isLoading = false
-    }
-    
-    @MainActor
-    func getBusStopData(busStopId: String) async {
-        isLoading = true
-        do {
-            busStopData = try await busStopsRepository.getBusStopDataById(busStopId: busStopId)
-            showErrorAlertForStopDetails = false
-        } catch {
-            self.error = error
-            print("Error al obtener datos de la parada de autobús con ID \(busStopId):", error)
-            showErrorAlertForStopDetails = true
-        }
-        isLoading = false
     }
 
-    @MainActor
-    func isFavorite(busStop: BusStop, busLine: String) -> Bool {
-        return busStopsRepository.isFavorite(busStop: busStop, busLine: busLine)
+    func getBusStopData(busStopId: String) async {
+        let id = UUID()
+        arrivalsRequestID = id
+        arrivalsState = .loading
+        do {
+            let detail = try await repository.getBusStopDataById(busStopId: busStopId)
+            try Task.checkCancellation()
+            guard arrivalsRequestID == id else { return }
+            arrivalsState = detail.destinos.isEmpty ? .empty : .content(detail.destinos)
+        } catch {
+            guard arrivalsRequestID == id else { return }
+            if error is CancellationError || Task.isCancelled { arrivalsState = .idle; return }
+            log(error)
+            arrivalsState = .failed
+        }
     }
-    
-    @MainActor
-    func addFavorite(busStop: BusStop, busLine: String) {
-        busStopsRepository.addFavorite(busStop: busStop, busLine: busLine)
+
+    func isFavorite(busStop: BusStop, busLine: String) async -> Bool {
+        await repository.isFavorite(busStop: busStop, busLine: busLine)
     }
-    
-    @MainActor
-    func removeFavorite(busStop: BusStop, busLine: String) {
-        busStopsRepository.removeFavorite(busStop: busStop, busLine: busLine)
+
+    func setFavorite(_ favorite: Bool, busStop: BusStop, busLine: String) async {
+        if favorite { await repository.addFavorite(busStop: busStop, busLine: busLine) }
+        else { await repository.removeFavorite(busStop: busStop, busLine: busLine) }
+    }
+
+    private func log(_ error: any Error) {
+        Logger(subsystem: "TransportZaragoza", category: "BusDetail").error("Loading failed: \(String(reflecting: error), privacy: .private)")
     }
 }

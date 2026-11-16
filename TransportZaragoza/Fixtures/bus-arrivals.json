@@ -1,0 +1,17 @@
+{
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -0.90729758,
+      41.6270265
+    ]
+  },
+  "destinos": [
+    {
+      "linea": "58",
+      "destino": "FUENTE JUNQUERA",
+      "primero": "3 minutos.",
+      "segundo": "12 minutos."
+    }
+  ]
+}

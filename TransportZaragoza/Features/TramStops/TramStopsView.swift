@@ -5,7 +5,7 @@ struct TramStopsView: View {
     @StateObject private var viewModel: TramStopsViewModel
     @EnvironmentObject var coordinator: Coordinator
     @State private var selectedDirection: Int = 0
-    @State private var showingAlert = false
+    @State private var reloadID = 0
     
     init(
         viewModel: TramStopsViewModel
@@ -20,7 +20,7 @@ struct TramStopsView: View {
             .foregroundColor(.orange)
             .cornerRadius(10)
             .padding(.bottom, 5)
-        NavigationStack {
+        Group {
             VStack {
                 Picker("Dirección", selection: $selectedDirection) {
                     Text("Mago de Oz").tag(0)
@@ -31,17 +31,15 @@ struct TramStopsView: View {
                 List(sortedTramStops) { tramStop in
                     makeNavigationLink(for: tramStop)
                 }
-                .task {
+                .task(id: reloadID) {
                     await viewModel.getTramStops()
                 }
             }
-            .navigationBarHidden(true)
+            .navigationTitle("Tranvía")
             .alert("Error", isPresented: $viewModel.showErrorAlert) {
                 Button("Cancelar", role: .cancel) { }
                 Button("Reintentar") {
-                    Task {
-                        await viewModel.getTramStops()
-                    }
+                    reloadID += 1
                 }
             } message: {
                 Text("Error al cargar las paradas")
@@ -63,11 +61,7 @@ struct TramStopsView: View {
     }
     
     private func makeNavigationLink(for tramStop: TramStop) -> some View {
-        NavigationLink {
-            coordinator.createTramStopDetailView(tramStop: tramStop)
-        } label: {
-            coordinator.createTramStopRowView(tramStop: tramStop)
-        }
+        coordinator.createTramStopRowView(tramStop: tramStop)
     }
     
 }

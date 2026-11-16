@@ -46,7 +46,7 @@ struct TramStopDetailView: View {
                 
                 if let destinos = tramStop.destinos {
                     GroupBox(label: Text("Tiempo de llegada:").font(.title3)) {
-                        ForEach(destinos, id: \.linea) { destino in
+                        ForEach(Array(destinos.enumerated()), id: \.offset) { _, destino in
                             VStack(alignment: .leading, spacing: 5) {
                                 Text("Línea: \(destino.linea)")
                                     .font(.headline)

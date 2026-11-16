@@ -1,77 +1,70 @@
 import SwiftUI
 import MapKit
+import UIKit
 
 struct BusLineStopDetailView: View {
-    
     let busStop: BusStop
-    
     @StateObject private var viewModel: BusLineDetailViewModel
-    
+    @State private var reloadID = 0
+
     init(busStop: BusStop, viewModel: BusLineDetailViewModel) {
         self.busStop = busStop
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
-        
-        let bounds = MapCameraBounds(
-            centerCoordinateBounds: MKCoordinateRegion(
-                center: CLLocationCoordinate2D(
-                    latitude: busStop.location.coordinates[1],
-                    longitude: busStop.location.coordinates[0]),
-                span: MKCoordinateSpan(
-                    latitudeDelta: 0.05,
-                    longitudeDelta: 0.05)),
-            minimumDistance: 500,
-            maximumDistance: 5000
-        )
-
-        VStack {
-            Map(bounds: bounds) {
-                Annotation(busStop.title.extractAddress(),
-                           coordinate: CLLocationCoordinate2D(
-                            latitude: busStop.location.coordinates[1],
-                            longitude: busStop.location.coordinates[0]), anchor: .bottom) {
-                                VStack {
-                                    Text("Parada:  \(busStop.id)")
-                                    Image(systemName: "bus.fill")
-                                }
-                                .foregroundColor(.blue)
-                                .padding()
-                                .background(in: .ellipse)
-                            }
-            }
-            .frame(height: 300)
-            .cornerRadius(8)
-
-            if viewModel.isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .padding()
-            } else if let busStopData = viewModel.busStopData {
-                VStack(alignment: .leading) {
-                    ForEach(busStopData.destinos, id: \.linea) { destino in
-                        Section(header: Text("Línea \(destino.linea):").font(.headline)) {
-                            Text("Próximo bus: \(destino.primero)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Text("Siguiente bus: \(destino.segundo)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                Text(busStop.title.extractAddress()).font(.title2).accessibilityAddTraits(.isHeader)
+                if let coordinate = busStop.location.mapCoordinate {
+                    Map(initialPosition: .region(MKCoordinateRegion(
+                        center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                    ))) { Marker(busStop.title.extractAddress(), coordinate: coordinate) }
+                    .frame(height: 200)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .accessibilityLabel("Ubicación de la parada \(busStop.id)")
+                }
+                Text("Tiempos de llegada").font(.headline).accessibilityAddTraits(.isHeader)
+                switch viewModel.arrivalsState {
+                case .idle, .loading:
+                    ProgressView("Consultando tiempos…")
+                case .content(let arrivals):
+                    ForEach(Array(arrivals.enumerated()), id: \.offset) { _, arrival in
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Línea \(arrival.linea) · \(arrival.destino)").font(.headline)
+                            Text("Próximo bus: \(arrival.primero)")
+                            Text("Siguiente bus: \(arrival.segundo)").foregroundStyle(.secondary)
                         }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityIdentifier("arrival-\(arrival.linea)")
                         Divider()
                     }
+                case .empty:
+                    Label("No hay información de tiempos disponible para esta parada.", systemImage: "clock")
+                case .failed:
+                    Label("No se pudieron consultar los tiempos. Comprueba tu conexión.", systemImage: "wifi.exclamationmark")
                 }
+                Button(viewModel.arrivalsState == .failed ? "Reintentar" : "Actualizar tiempos", systemImage: "arrow.clockwise") {
+                    reloadID += 1
+                }
+                .buttonStyle(.borderedProminent)
+                .accessibilityIdentifier("reload-arrivals")
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
         }
-        .task {
-            await viewModel.getBusStopData(busStopId: busStop.id)
+        .navigationTitle("Parada \(busStop.id)")
+        .navigationBarTitleDisplayMode(.inline)
+        .task(id: reloadID) { await viewModel.getBusStopData(busStopId: busStop.id) }
+        .onChange(of: viewModel.arrivalsState) { _, state in
+            let message: String
+            switch state {
+            case .content: message = String(localized: "Tiempos de llegada actualizados")
+            case .empty: message = String(localized: "No hay información de tiempos disponible")
+            case .failed: message = String(localized: "No se pudieron consultar los tiempos")
+            default: return
+            }
+            UIAccessibility.post(notification: .announcement, argument: message)
         }
-        .padding()
     }
-}
-
-#Preview {
-    let coordinator = Coordinator()
-    return coordinator.createBusLineStopDetailView(busStop: .example).environmentObject(coordinator)
 }

@@ -1,0 +1,29 @@
+{
+  "totalCount": 2,
+  "start": 0,
+  "rows": 500,
+  "result": [
+    {
+      "id": "tuzsa-688",
+      "title": "(688) P. Reyes De Aragón N.º 24 Líneas: 58",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.90729758,
+          41.6270265
+        ]
+      }
+    },
+    {
+      "id": "rural-901",
+      "title": "(901) Urbanización Torrebarajas Líneas: 605",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.9523314,
+          41.6728836
+        ]
+      }
+    }
+  ]
+}

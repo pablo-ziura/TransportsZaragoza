@@ -1,12 +1,18 @@
 import Foundation
 
 struct UserDefaultsBusStopsLocalService: BusStopsLocalService {
+    private let defaults: UserDefaults
+
+    init(suiteName: String? = nil) {
+        defaults = suiteName.flatMap(UserDefaults.init(suiteName:)) ?? .standard
+    }
+
     
     private let busStopsKey = "busStops"
     private let favoritesKey = "favBusStops"
     
     func getBusStops() throws -> [BusStop] {
-        guard let data = UserDefaults.standard.data(forKey: busStopsKey) else {
+        guard let data = defaults.data(forKey: busStopsKey) else {
             return []
         }
         return try JSONDecoder().decode([BusStop].self, from: data)
@@ -14,7 +20,7 @@ struct UserDefaultsBusStopsLocalService: BusStopsLocalService {
     
     func save(busStops: [BusStop]) throws {
         let data = try JSONEncoder().encode(busStops)
-        UserDefaults.standard.set(data, forKey: busStopsKey)
+        defaults.set(data, forKey: busStopsKey)
     }
     
     func isFavorite(busStop: BusStop, busLine: String) -> Bool {
@@ -38,7 +44,7 @@ struct UserDefaultsBusStopsLocalService: BusStopsLocalService {
     }
     
     func getFavorites() -> [BusStop] {
-        guard let data = UserDefaults.standard.data(forKey: favoritesKey) else { return [] }
+        guard let data = defaults.data(forKey: favoritesKey) else { return [] }
         let decoder = JSONDecoder()
         return (try? decoder.decode([BusStop].self, from: data)) ?? []
     }
@@ -46,7 +52,7 @@ struct UserDefaultsBusStopsLocalService: BusStopsLocalService {
     private func saveFavorites(_ favorites: [BusStop]) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(favorites) {
-            UserDefaults.standard.set(encoded, forKey: favoritesKey)
+            defaults.set(encoded, forKey: favoritesKey)
         }
     }
 }

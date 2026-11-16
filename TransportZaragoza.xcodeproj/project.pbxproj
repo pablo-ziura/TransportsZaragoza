@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		093221A18EF303BF569B8B50 /* TransportNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = D131CFC0EB3D9BFEC4865907 /* TransportNetwork */; };
+		43497B6FB3CE21982C1FF038 /* bus-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = A776B79A1B56366E68678856 /* bus-stops.json */; };
+		4A158077A7E98D2242E2A08F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 66BD37E385E108D9EAFE39A3 /* Lottie */; };
 		5C198F022B1AA5A500F359C8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5C198F012B1AA5A500F359C8 /* Lottie */; };
-		5C198F052B1AA72700F359C8 /* Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C198F042B1AA72700F359C8 /* Animation.json */; };
 		5C198F072B1AA79100F359C8 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C198F062B1AA79100F359C8 /* LottieView.swift */; };
 		5C4158932B0CD69400D5C36A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4158922B0CD69400D5C36A /* StringExtensions.swift */; };
 		5C4158972B0CE6A300D5C36A /* BusLineDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4158962B0CE6A300D5C36A /* BusLineDetailViewModel.swift */; };
-		5C5056B72B03F22200C64B4C /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5056B62B03F22200C64B4C /* NetworkClient.swift */; };
-		5C5056B92B03F25C00C64B4C /* URLSessionNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5056B82B03F25C00C64B4C /* URLSessionNetworkClient.swift */; };
-		5C5056BB2B03F28300C64B4C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5056BA2B03F28300C64B4C /* NetworkError.swift */; };
 		5C5056C02B03F3E000C64B4C /* LiveTramStopsRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5056BF2B03F3E000C64B4C /* LiveTramStopsRemoteService.swift */; };
 		5C5056C22B03F94000C64B4C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5056C12B03F94000C64B4C /* Coordinator.swift */; };
 		5C5756D02B028F0000A8680E /* TransportZaragozaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5756CF2B028F0000A8680E /* TransportZaragozaApp.swift */; };
@@ -46,16 +45,45 @@
 		5CBAFD052B07DC3C00D6F013 /* BusStopsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFD042B07DC3C00D6F013 /* BusStopsRepository.swift */; };
 		5CBBB3972B02BDFD009EB2BD /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBBB3962B02BDFD009EB2BD /* APIResponse.swift */; };
 		5CC7246B2B0A976B001567B2 /* BusLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7246A2B0A976B001567B2 /* BusLineDetailView.swift */; };
+		73DC523A7A732D5723EF430D /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E324D677050CCA2CA0613A00 /* LoadState.swift */; };
+		77316AD185968BCF4214A635 /* bus-rural.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D6877E8ACE65D6DDC4B7F42 /* bus-rural.json */; };
+		78AB335FF1EB478EEC3A0C36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA3FF3E97209940FDC552E8 /* Foundation.framework */; };
+		79A7E3A32948E3AFABF54F17 /* tram-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 37C61B92A917A77B380FF90E /* tram-stops.json */; };
+		8D83420E819450FE51198AF6 /* Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3919910CC2D053F39D4CAF86 /* Animation.json */; };
+		A58AC1BC1349E6CDA40D32C9 /* BusFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1923890EB2DBCF6EF160D2D8 /* BusFlowTests.swift */; };
+		A8CB019FB87ECF15B7681CBA /* bus-arrivals.json in Resources */ = {isa = PBXBuildFile; fileRef = 633D034B08622D37186F861B /* bus-arrivals.json */; };
+		B0AA1DCD630D91CBF9A9CF2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA3FF3E97209940FDC552E8 /* Foundation.framework */; };
+		C63841274798948BC533A829 /* BusJourneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB39CDD4764A2922BEDB742D /* BusJourneyTests.swift */; };
+		D24F5DDA766C2ED656796637 /* TransportNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 78DB799930D08251E96DFE34 /* TransportNetwork */; };
+		D2A07A209EB645D90FC63EBE /* FixtureTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F558EA6386200BF140A7A /* FixtureTransport.swift */; };
+		F5A75E6785026B06EA5B33E0 /* bus-invalid.json in Resources */ = {isa = PBXBuildFile; fileRef = C31A74575A5FBDB94CC55120 /* bus-invalid.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5F451DA975F653FACD5A8323 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C5756C42B028F0000A8680E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C5756CB2B028F0000A8680E;
+			remoteInfo = TransportZaragoza;
+		};
+		F5D9BC8154A7C63CAA548851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C5756C42B028F0000A8680E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C5756CB2B028F0000A8680E;
+			remoteInfo = TransportZaragoza;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		5C198F042B1AA72700F359C8 /* Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Animation.json; path = ../../../../../Downloads/Animation.json; sourceTree = "<group>"; };
+		1923890EB2DBCF6EF160D2D8 /* BusFlowTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = BusFlowTests.swift; sourceTree = "<group>"; };
+		37C61B92A917A77B380FF90E /* tram-stops.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = "tram-stops.json"; sourceTree = "<group>"; };
+		3919910CC2D053F39D4CAF86 /* Animation.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = Animation.json; sourceTree = "<group>"; };
+		4DD3ACBEAFD7ADDA9B1833E3 /* TransportZaragozaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransportZaragozaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C198F062B1AA79100F359C8 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		5C4158922B0CD69400D5C36A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		5C4158962B0CE6A300D5C36A /* BusLineDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLineDetailViewModel.swift; sourceTree = "<group>"; };
-		5C5056B62B03F22200C64B4C /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		5C5056B82B03F25C00C64B4C /* URLSessionNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionNetworkClient.swift; sourceTree = "<group>"; };
-		5C5056BA2B03F28300C64B4C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5C5056BF2B03F3E000C64B4C /* LiveTramStopsRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTramStopsRemoteService.swift; sourceTree = "<group>"; };
 		5C5056C12B03F94000C64B4C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		5C5756CC2B028F0000A8680E /* TransportZaragoza.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransportZaragoza.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,25 +116,71 @@
 		5CBAFD042B07DC3C00D6F013 /* BusStopsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopsRepository.swift; sourceTree = "<group>"; };
 		5CBBB3962B02BDFD009EB2BD /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		5CC7246A2B0A976B001567B2 /* BusLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLineDetailView.swift; sourceTree = "<group>"; };
+		633D034B08622D37186F861B /* bus-arrivals.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = "bus-arrivals.json"; sourceTree = "<group>"; };
+		7D6877E8ACE65D6DDC4B7F42 /* bus-rural.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = "bus-rural.json"; sourceTree = "<group>"; };
+		823EFFD28B493DC4B2C8890E /* TransportZaragozaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransportZaragozaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AA3FF3E97209940FDC552E8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		A75F558EA6386200BF140A7A /* FixtureTransport.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = FixtureTransport.swift; sourceTree = "<group>"; };
+		A776B79A1B56366E68678856 /* bus-stops.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = "bus-stops.json"; sourceTree = "<group>"; };
+		BB39CDD4764A2922BEDB742D /* BusJourneyTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = BusJourneyTests.swift; sourceTree = "<group>"; };
+		C31A74575A5FBDB94CC55120 /* bus-invalid.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = "bus-invalid.json"; sourceTree = "<group>"; };
+		E324D677050CCA2CA0613A00 /* LoadState.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		489B001FE1F9C0FCFD5B92B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0AA1DCD630D91CBF9A9CF2E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C5756C92B028F0000A8680E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5C198F022B1AA5A500F359C8 /* Lottie in Frameworks */,
+				093221A18EF303BF569B8B50 /* TransportNetwork in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F8109ABAA8C41957179005F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78AB335FF1EB478EEC3A0C36 /* Foundation.framework in Frameworks */,
+				D24F5DDA766C2ED656796637 /* TransportNetwork in Frameworks */,
+				4A158077A7E98D2242E2A08F /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33F4E15FBFAA6D8CD7C0E9B8 /* TransportZaragozaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BB39CDD4764A2922BEDB742D /* BusJourneyTests.swift */,
+			);
+			name = TransportZaragozaUITests;
+			path = TransportZaragozaUITests;
+			sourceTree = "<group>";
+		};
+		45F63F5BDEF4CA81F5A664D3 /* TransportZaragozaTests */ = {
+			isa = PBXGroup;
+			children = (
+				1923890EB2DBCF6EF160D2D8 /* BusFlowTests.swift */,
+			);
+			name = TransportZaragozaTests;
+			path = TransportZaragozaTests;
+			sourceTree = "<group>";
+		};
 		5C198F032B1AA5D900F359C8 /* LottieFiles */ = {
 			isa = PBXGroup;
 			children = (
-				5C198F042B1AA72700F359C8 /* Animation.json */,
 				5C198F062B1AA79100F359C8 /* LottieView.swift */,
+				3919910CC2D053F39D4CAF86 /* Animation.json */,
 			);
 			path = LottieFiles;
 			sourceTree = "<group>";
@@ -145,6 +219,7 @@
 			children = (
 				5C9A3E7C2B05807500591BA4 /* BusStops */,
 				5C5056BC2B03F31000C64B4C /* TramStops */,
+				A75F558EA6386200BF140A7A /* FixtureTransport.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -152,9 +227,6 @@
 		5C5056B32B03F18F00C64B4C /* NetworkClient */ = {
 			isa = PBXGroup;
 			children = (
-				5C5056B62B03F22200C64B4C /* NetworkClient.swift */,
-				5C5056B82B03F25C00C64B4C /* URLSessionNetworkClient.swift */,
-				5C5056BA2B03F28300C64B4C /* NetworkError.swift */,
 			);
 			path = NetworkClient;
 			sourceTree = "<group>";
@@ -193,6 +265,9 @@
 			children = (
 				5C5756CE2B028F0000A8680E /* TransportZaragoza */,
 				5C5756CD2B028F0000A8680E /* Products */,
+				D2DA708AA6DBC735B5AC8230 /* Frameworks */,
+				45F63F5BDEF4CA81F5A664D3 /* TransportZaragozaTests */,
+				33F4E15FBFAA6D8CD7C0E9B8 /* TransportZaragozaUITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				5C5756CC2B028F0000A8680E /* TransportZaragoza.app */,
+				4DD3ACBEAFD7ADDA9B1833E3 /* TransportZaragozaTests.xctest */,
+				823EFFD28B493DC4B2C8890E /* TransportZaragozaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,6 +295,7 @@
 				5C5056C12B03F94000C64B4C /* Coordinator.swift */,
 				5C5756D12B028F0000A8680E /* ContentView.swift */,
 				5C5756D32B028F0100A8680E /* Assets.xcassets */,
+				681E06240D916BB372720A0D /* Fixtures */,
 			);
 			path = TransportZaragoza;
 			sourceTree = "<group>";
@@ -266,6 +344,7 @@
 				5CC7246A2B0A976B001567B2 /* BusLineDetailView.swift */,
 				5C77AAFA2B1CEDC400619F26 /* BusLineStopRowView.swift */,
 				5C77AAFC2B1D006300619F26 /* BusLineStopDetailView.swift */,
+				E324D677050CCA2CA0613A00 /* LoadState.swift */,
 			);
 			path = BusLines;
 			sourceTree = "<group>";
@@ -315,9 +394,60 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
+		681E06240D916BB372720A0D /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				37C61B92A917A77B380FF90E /* tram-stops.json */,
+				A776B79A1B56366E68678856 /* bus-stops.json */,
+				633D034B08622D37186F861B /* bus-arrivals.json */,
+				C31A74575A5FBDB94CC55120 /* bus-invalid.json */,
+				7D6877E8ACE65D6DDC4B7F42 /* bus-rural.json */,
+			);
+			name = Fixtures;
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		851B53676A42330FE86078E9 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9AA3FF3E97209940FDC552E8 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D2DA708AA6DBC735B5AC8230 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				851B53676A42330FE86078E9 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		04CCA0DF627A5C268675C979 /* TransportZaragozaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5615026D265FE5969041DE56 /* Build configuration list for PBXNativeTarget "TransportZaragozaTests" */;
+			buildPhases = (
+				C237324D9EED21A2A3362B51 /* Sources */,
+				5F8109ABAA8C41957179005F /* Frameworks */,
+				1321897EDB7BE177811D8AE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D956775A0E92A1097D32BA30 /* PBXTargetDependency */,
+			);
+			name = TransportZaragozaTests;
+			packageProductDependencies = (
+				78DB799930D08251E96DFE34 /* TransportNetwork */,
+				66BD37E385E108D9EAFE39A3 /* Lottie */,
+			);
+			productName = TransportZaragozaTests;
+			productReference = 4DD3ACBEAFD7ADDA9B1833E3 /* TransportZaragozaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5C5756CB2B028F0000A8680E /* TransportZaragoza */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C5756DA2B028F0100A8680E /* Build configuration list for PBXNativeTarget "TransportZaragoza" */;
@@ -333,10 +463,29 @@
 			name = TransportZaragoza;
 			packageProductDependencies = (
 				5C198F012B1AA5A500F359C8 /* Lottie */,
+				D131CFC0EB3D9BFEC4865907 /* TransportNetwork */,
 			);
 			productName = TransportZaragoza;
 			productReference = 5C5756CC2B028F0000A8680E /* TransportZaragoza.app */;
 			productType = "com.apple.product-type.application";
+		};
+		707504D0E79E7ED587746E1E /* TransportZaragozaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B8F343FB03B21040CFCA3F6 /* Build configuration list for PBXNativeTarget "TransportZaragozaUITests" */;
+			buildPhases = (
+				8D4AA93A35B89A577F1F1398 /* Sources */,
+				489B001FE1F9C0FCFD5B92B9 /* Frameworks */,
+				E16B8C30818359D1FB8DABB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8AE3C02B503FE0A0E99F315F /* PBXTargetDependency */,
+			);
+			name = TransportZaragozaUITests;
+			productName = TransportZaragozaUITests;
+			productReference = 823EFFD28B493DC4B2C8890E /* TransportZaragozaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -364,24 +513,46 @@
 			mainGroup = 5C5756C32B028F0000A8680E;
 			packageReferences = (
 				5C198F002B1AA5A500F359C8 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				7734F43562BF3F457B4F63A0 /* XCLocalSwiftPackageReference "Packages/TransportNetwork" */,
 			);
 			productRefGroup = 5C5756CD2B028F0000A8680E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				5C5756CB2B028F0000A8680E /* TransportZaragoza */,
+				04CCA0DF627A5C268675C979 /* TransportZaragozaTests */,
+				707504D0E79E7ED587746E1E /* TransportZaragozaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1321897EDB7BE177811D8AE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C5756CA2B028F0000A8680E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C198F052B1AA72700F359C8 /* Animation.json in Resources */,
 				5C5756D72B028F0100A8680E /* Preview Assets.xcassets in Resources */,
 				5C5756D42B028F0100A8680E /* Assets.xcassets in Resources */,
+				8D83420E819450FE51198AF6 /* Animation.json in Resources */,
+				79A7E3A32948E3AFABF54F17 /* tram-stops.json in Resources */,
+				43497B6FB3CE21982C1FF038 /* bus-stops.json in Resources */,
+				A8CB019FB87ECF15B7681CBA /* bus-arrivals.json in Resources */,
+				F5A75E6785026B06EA5B33E0 /* bus-invalid.json in Resources */,
+				77316AD185968BCF4214A635 /* bus-rural.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E16B8C30818359D1FB8DABB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +577,6 @@
 				5C5756DE2B028F3C00A8680E /* TramStop.swift in Sources */,
 				5C5756D22B028F0000A8680E /* ContentView.swift in Sources */,
 				5C5756D02B028F0000A8680E /* TransportZaragozaApp.swift in Sources */,
-				5C5056BB2B03F28300C64B4C /* NetworkError.swift in Sources */,
 				5CBAFCFA2B07C3BA00D6F013 /* SplashScreenView.swift in Sources */,
 				5C77AAF92B1CE4A400619F26 /* FavoriteListView.swift in Sources */,
 				5C77AAFB2B1CEDC400619F26 /* BusLineStopRowView.swift in Sources */,
@@ -415,24 +585,94 @@
 				5C947AA02B041F900014B176 /* BusLinesView.swift in Sources */,
 				5C77C8542B30FDC000DB06A1 /* TramStopsRemoteService.swift in Sources */,
 				5C4158932B0CD69400D5C36A /* StringExtensions.swift in Sources */,
-				5C5056B92B03F25C00C64B4C /* URLSessionNetworkClient.swift in Sources */,
 				5C4158972B0CE6A300D5C36A /* BusLineDetailViewModel.swift in Sources */,
 				5C77AAFD2B1D006300619F26 /* BusLineStopDetailView.swift in Sources */,
 				5C77AAEE2B1CD3C800619F26 /* TramStopRowView.swift in Sources */,
 				5C77C8562B30FE3200DB06A1 /* TramStopsLocalService.swift in Sources */,
-				5C5056B72B03F22200C64B4C /* NetworkClient.swift in Sources */,
 				5CBAFD052B07DC3C00D6F013 /* BusStopsRepository.swift in Sources */,
 				5C9A3E7E2B05809000591BA4 /* LiveBusStopsRemoteService.swift in Sources */,
 				5C77AAF02B1CD61900619F26 /* TramStopsRepository.swift in Sources */,
 				5C77C8522B30FBA100DB06A1 /* BusStopsLocalService.swift in Sources */,
 				5CBAFCFF2B07C7A600D6F013 /* UserDefaultsBusStopsLocalService.swift in Sources */,
 				5C198F072B1AA79100F359C8 /* LottieView.swift in Sources */,
+				73DC523A7A732D5723EF430D /* LoadState.swift in Sources */,
+				D2A07A209EB645D90FC63EBE /* FixtureTransport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D4AA93A35B89A577F1F1398 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C63841274798948BC533A829 /* BusJourneyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C237324D9EED21A2A3362B51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A58AC1BC1349E6CDA40D32C9 /* BusFlowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8AE3C02B503FE0A0E99F315F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TransportZaragoza;
+			target = 5C5756CB2B028F0000A8680E /* TransportZaragoza */;
+			targetProxy = 5F451DA975F653FACD5A8323 /* PBXContainerItemProxy */;
+		};
+		D956775A0E92A1097D32BA30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TransportZaragoza;
+			target = 5C5756CB2B028F0000A8680E /* TransportZaragoza */;
+			targetProxy = F5D9BC8154A7C63CAA548851 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1C0B5EA3B8F603E4C1232EFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TransportZaragoza;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		315357AF06ECEC61530C3C9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TransportZaragoza.app/TransportZaragoza";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		5C5756D82B028F0100A8680E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -577,8 +817,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragoza;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -594,6 +836,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TransportZaragoza/Preview Content\"";
 				DEVELOPMENT_TEAM = 4SD9GF7ZSL;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "FixtureTransport.swift bus-stops.json bus-arrivals.json bus-rural.json bus-invalid.json tram-stops.json";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -608,15 +851,63 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragoza;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
+		D45C6B15F24805AD5E08E465 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TransportZaragoza;
+			};
+			name = Debug;
+		};
+		F6B72D0EE7ED6BD36DF3A67D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Pablo.TransportZaragozaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TransportZaragoza.app/TransportZaragoza";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5615026D265FE5969041DE56 /* Build configuration list for PBXNativeTarget "TransportZaragozaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				315357AF06ECEC61530C3C9C /* Release */,
+				F6B72D0EE7ED6BD36DF3A67D /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5C5756C72B028F0000A8680E /* Build configuration list for PBXProject "TransportZaragoza" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -635,7 +926,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		8B8F343FB03B21040CFCA3F6 /* Build configuration list for PBXNativeTarget "TransportZaragozaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C0B5EA3B8F603E4C1232EFA /* Release */,
+				D45C6B15F24805AD5E08E465 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		7734F43562BF3F457B4F63A0 /* XCLocalSwiftPackageReference "Packages/TransportNetwork" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/TransportNetwork;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		5C198F002B1AA5A500F359C8 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
@@ -653,6 +960,19 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5C198F002B1AA5A500F359C8 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		66BD37E385E108D9EAFE39A3 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C198F002B1AA5A500F359C8 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+		78DB799930D08251E96DFE34 /* TransportNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TransportNetwork;
+		};
+		D131CFC0EB3D9BFEC4865907 /* TransportNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TransportNetwork;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

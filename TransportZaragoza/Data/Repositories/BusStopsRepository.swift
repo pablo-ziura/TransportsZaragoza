@@ -1,69 +1,49 @@
 import Foundation
 
-class BusStopsRepository {
-    
-    private let remoteService: LiveBusStopsRemoteService
+protocol BusStopsProviding: Sendable {
+    func getBusStops(updateData: Bool) async throws -> [BusStop]
+    func getBusStopDataById(busStopId: String) async throws -> BusStopData
+    func isFavorite(busStop: BusStop, busLine: String) async -> Bool
+    func addFavorite(busStop: BusStop, busLine: String) async
+    func removeFavorite(busStop: BusStop, busLine: String) async
+    func getFavorites() async -> [BusStop]
+}
+
+actor BusStopsRepository: BusStopsProviding {
+    private let remoteService: any BusStopsRemoteService
     private let localService: UserDefaultsBusStopsLocalService
-    private var error: Error?
-    
-    init(remoteService: LiveBusStopsRemoteService, localService: UserDefaultsBusStopsLocalService) {
+    private var catalogRequestID: UUID?
+
+    init(remoteService: any BusStopsRemoteService, defaultsSuiteName: String? = nil) {
         self.remoteService = remoteService
-        self.localService = localService
+        localService = UserDefaultsBusStopsLocalService(suiteName: defaultsSuiteName)
     }
-    
+
     func getBusStops(updateData: Bool = false) async throws -> [BusStop] {
-        if updateData {
-            do {
-                let remoteBusStops = try await remoteService.getBusStops()
-                try localService.save(busStops: remoteBusStops)
-                return remoteBusStops
-            } catch let error {
-                self.error = error
-                print("Error al cargar paradas de autobús desde remoto:", error)
-                throw error
-            }
-        } else {
-            let localBusStops = try localService.getBusStops()
-            if !localBusStops.isEmpty {
-                return localBusStops
-            }
-            let remoteBusStops = try await remoteService.getBusStops()
-            try localService.save(busStops: remoteBusStops)
-            return remoteBusStops
-        }
+        if !updateData, let cached = try? localService.getBusStops(), !cached.isEmpty { return cached }
+        let requestID = UUID()
+        catalogRequestID = requestID
+        let stops = try await remoteService.getBusStops()
+        try Task.checkCancellation()
+        if catalogRequestID == requestID { try localService.save(busStops: stops) }
+        return stops
     }
-    
+
     func getBusStopDataById(busStopId: String) async throws -> BusStopData {
-        do {
-            let busStopData = try await remoteService.getBusStopDataById(busStopId: busStopId)
-            return busStopData
-        } catch let error {
-            self.error = error
-            print("Error al obtener datos de la parada de autobús:", error)
-            throw error
-        }
+        try await remoteService.getBusStopDataById(busStopId: busStopId)
     }
-    
-    func getBusStopsByLine(busLine: String) async throws -> [BusStop] {
-        let allBusStops = try await getBusStops()
-        return allBusStops.filter { $0.title.extractLines().contains(busLine) }
-    }
-        
+
     func isFavorite(busStop: BusStop, busLine: String) -> Bool {
-        return localService.isFavorite(busStop: busStop, busLine: busLine)
+        localService.isFavorite(busStop: busStop, busLine: busLine)
     }
-    
+
     func addFavorite(busStop: BusStop, busLine: String) {
         localService.addFavorite(busStop: busStop, busLine: busLine)
     }
-    
+
     func removeFavorite(busStop: BusStop, busLine: String) {
         localService.removeFavorite(busStop: busStop, busLine: busLine)
     }
-    
-    func getFavorites() -> [BusStop] {
-        return localService.getFavorites()
-    }
+
+    func getFavorites() -> [BusStop] { localService.getFavorites() }
 }
-
-

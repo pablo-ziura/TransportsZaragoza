@@ -1,6 +1,7 @@
 import Foundation
+import MapKit
 
-struct TramStop: Codable, Identifiable {
+struct TramStop: Codable, Identifiable, Sendable, Equatable {
     let id: String
     let detailURL: String
     let title: String
@@ -29,12 +30,21 @@ struct TramStop: Codable, Identifiable {
     }
 }
 
-struct Coordinates: Codable {
+struct Coordinates: Codable, Sendable, Equatable {
     let coordinates: [Double]
 }
 
-struct Destino: Codable {
+struct Destino: Codable, Sendable, Equatable {
     let linea: String
     let destino: String
     let minutos: Int
+}
+
+extension Coordinates {
+    var mapCoordinate: CLLocationCoordinate2D? {
+        guard coordinates.count >= 2,
+              coordinates[0].isFinite, coordinates[1].isFinite,
+              (-180...180).contains(coordinates[0]), (-90...90).contains(coordinates[1]) else { return nil }
+        return CLLocationCoordinate2D(latitude: coordinates[1], longitude: coordinates[0])
+    }
 }

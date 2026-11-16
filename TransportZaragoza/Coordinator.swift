@@ -1,35 +1,39 @@
 import Foundation
+import TransportNetwork
 import SwiftUI
 
-class Coordinator: ObservableObject {
+@MainActor
+final class Coordinator: ObservableObject {
     
     private let busStopsRepository: BusStopsRepository
     private let tramStopsRepository: TramStopsRepository
     
     init() {
         
-        let networkClient = URLSessionNetworkClient()
-                
-        let tramStopsRemoteService: LiveTramStopsRemoteService = LiveTramStopsRemoteService(networkClient: networkClient)
-        
-        let tramStopsLocalService: UserDefaultsTramStopsLocalService = UserDefaultsTramStopsLocalService()
-        
+        let baseURL = URL(string: "https://www.zaragoza.es/sede/servicio/urbanismo-infraestructuras/transporte-urbano")!
+        let networkClient: NetworkClient
+        var suiteName: String?
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--ui-testing") || ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            networkClient = NetworkClient(baseURL: baseURL, transport: FixtureTransport())
+            suiteName = "TransportZaragoza.UITests"
+            if ProcessInfo.processInfo.arguments.contains("--reset-storage") {
+                UserDefaults(suiteName: suiteName!)?.removePersistentDomain(forName: suiteName!)
+            }
+        } else {
+            networkClient = NetworkClient(baseURL: baseURL)
+        }
+        #else
+        networkClient = NetworkClient(baseURL: baseURL)
+        #endif
         tramStopsRepository = TramStopsRepository(
-            remoteService: tramStopsRemoteService,
-            localService: tramStopsLocalService
+            remoteService: LiveTramStopsRemoteService(networkClient: networkClient), defaultsSuiteName: suiteName
         )
-        
-        let busStopsRemoteService: LiveBusStopsRemoteService = LiveBusStopsRemoteService(networkClient: networkClient)
-        
-        let busStopsLocalService: UserDefaultsBusStopsLocalService = UserDefaultsBusStopsLocalService()
-            
         busStopsRepository = BusStopsRepository(
-            remoteService: busStopsRemoteService,
-            localService: busStopsLocalService
+            remoteService: LiveBusStopsRemoteService(networkClient: networkClient), defaultsSuiteName: suiteName
         )
-        
     }
-    
+
     func createSplashScreenViewModel() -> SplashScreenViewModel {
         SplashScreenViewModel(
             busStopsRepository: busStopsRepository,

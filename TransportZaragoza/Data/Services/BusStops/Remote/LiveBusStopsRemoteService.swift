@@ -1,30 +1,36 @@
 import Foundation
+import TransportNetwork
 
 struct LiveBusStopsRemoteService: BusStopsRemoteService {
-    
-    private let networkClient: NetworkClient
-    private let baseURL = "https://www.zaragoza.es/sede/servicio/urbanismo-infraestructuras/transporte-urbano/"
-    
-    init(networkClient: NetworkClient) {
-        self.networkClient = networkClient
-    }
-    
+    let networkClient: any NetworkClientProtocol
+
     func getBusStops() async throws -> [BusStop] {
-        guard let url = URL(string: baseURL + "poste-autobus.json") else {
-            throw NetworkError.badUrl
+        var stops: [BusStop] = []
+        var start = 0
+        while true {
+            try Task.checkCancellation()
+            let page: APIResponse<BusStop> = try await networkClient.get(
+                endpoint: "poste-autobus.json",
+                params: ["start": String(start), "rows": "500", "srsname": "wgs84"], headers: nil
+            )
+            guard page.start == start, !page.result.isEmpty || start >= page.totalCount else {
+                throw MunicipalResponseError.incompletePage
+            }
+            stops.append(contentsOf: page.result)
+            start += page.result.count
+            if start >= page.totalCount { break }
         }
-        let urlRequest = URLRequest(url: url)
-        let response: APIResponse<BusStop> = try await networkClient.call(urlRequest: urlRequest)
-        return response.result
+        return stops
     }
-    
+
     func getBusStopDataById(busStopId: String) async throws -> BusStopData {
-        guard let encodedBusStopId = busStopId.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
-              let url = URL(string: baseURL + "poste-autobus/\(encodedBusStopId).json") else {
-            throw NetworkError.badUrl
-        }
-        let urlRequest = URLRequest(url: url)
-        let response: BusStopData = try await networkClient.call(urlRequest: urlRequest)
-        return response
+        try await networkClient.get(
+            endpoint: "poste-autobus/\(busStopId).json",
+            params: ["srsname": "wgs84"], headers: nil
+        )
     }
+}
+
+enum MunicipalResponseError: Error {
+    case incompletePage
 }

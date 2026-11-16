@@ -2,27 +2,24 @@ import SwiftUI
 import Lottie
 
 struct LottieView: UIViewRepresentable {
-    
-    typealias UIViewType = LottieAnimationView
-    
     let name: String
-    
-    init(name: String) {
-        self.name = name
-    }
-    
-    func makeUIView(context: Context) -> Lottie.LottieAnimationView {
-        let animationView = LottieAnimationView(name: "Animation")
-        animationView.loopMode = .loop
-        animationView.play()
-        return animationView
-    }
-    
-    func updateUIView(_ uiView: Lottie.LottieAnimationView, context: Context) {
-        // TODO
-    }
-}
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-#Preview {
-    LottieView(name: "Animation")
+    func makeUIView(context: Context) -> LottieAnimationView {
+        let view = LottieAnimationView(name: name)
+        view.loopMode = .loop
+        view.contentMode = .scaleAspectFit
+        return view
+    }
+
+    func updateUIView(_ uiView: LottieAnimationView, context: Context) {
+        if reduceMotion {
+            uiView.stop()
+            uiView.currentProgress = 0.5
+        } else if !uiView.isAnimationPlaying {
+            uiView.play()
+        }
+    }
+
+    static func dismantleUIView(_ uiView: LottieAnimationView, coordinator: ()) { uiView.stop() }
 }

@@ -11,13 +11,13 @@ extension String {
     
     func extractAddress() -> String {
         guard let rangeEnd = self.range(of: " Líneas: ") else {
-            return ""
+            return self
         }
         let addressPart = self[..<rangeEnd.lowerBound]
         if let rangeStart = addressPart.range(of: "\\) ", options: .regularExpression)?.upperBound {
             return String(addressPart[rangeStart...])
         }
-        return ""
+        return String(addressPart)
     }
     
     func toTitleCase() -> String {
@@ -44,6 +44,6 @@ extension String {
         let lineNumbersRange = Range(match.range(at: 1), in: self)!
         let lineNumbers = self[lineNumbersRange]
         
-        return lineNumbers.components(separatedBy: ", ").map { $0.trimmingCharacters(in: .whitespaces) }
+        return lineNumbers.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
     }
 }

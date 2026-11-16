@@ -1,6 +1,9 @@
 import Foundation
+import Combine
+import OSLog
 
-class SplashScreenViewModel: ObservableObject {
+@MainActor
+final class SplashScreenViewModel: ObservableObject {
     
     @Published var busStops: [BusStop] = []
     @Published var tramStops: [TramStop] = []
@@ -16,26 +19,26 @@ class SplashScreenViewModel: ObservableObject {
         self.tramStopsRepository = tramStopsRepository
     }
     
-    @MainActor
     func getBusStops() async {
         isLoading = true
         do {
             busStops = try await busStopsRepository.getBusStops(updateData: updateData)
         } catch (let error) {
+            if error is CancellationError || Task.isCancelled { isLoading = false; return }
             self.error = error
-            print("Error al cargar paradas de autobús:", error)
+            Logger(subsystem: "TransportZaragoza", category: "Startup").error("Prefetch failed: \(String(reflecting: error), privacy: .private)")
         }
         isLoading = false
     }
     
-    @MainActor
     func getTramStops() async {
         isLoading = true
         do {
             tramStops = try await tramStopsRepository.getTramStops(updateData: updateData)
         } catch (let error) {
+            if error is CancellationError || Task.isCancelled { isLoading = false; return }
             self.error = error
-            print("Error al cargar paradas de tranvía:", error)
+            Logger(subsystem: "TransportZaragoza", category: "Startup").error("Prefetch failed: \(String(reflecting: error), privacy: .private)")
         }
         isLoading = false
     }

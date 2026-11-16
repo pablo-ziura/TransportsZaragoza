@@ -1,0 +1,31 @@
+{
+  "totalCount": 1,
+  "start": 0,
+  "rows": 500,
+  "result": [
+    {
+      "id": "202",
+      "uri": "https://www.zaragoza.es/ciudad/viapublica/movilidad/detalle_Tranvia?oid=202",
+      "title": "PARQUE GOYA",
+      "geometry": {
+        "coordinates": [
+          -0.87871,
+          41.68673
+        ]
+      },
+      "lastUpdated": "2026-11-16T12:02:01",
+      "destinos": [
+        {
+          "linea": "L1",
+          "destino": "AVENIDA ACADEMIA",
+          "minutos": 6
+        },
+        {
+          "linea": "L1",
+          "destino": "AVENIDA ACADEMIA",
+          "minutos": 15
+        }
+      ]
+    }
+  ]
+}
