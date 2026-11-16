@@ -68,7 +68,6 @@ Capturas reales del simulador iPhone 17e con iOS 26.5. Los tiempos mostrados pro
 
 <p>
   <img src=".github/screenshots/bus-arrivals.png" alt="Detalle de parada y tiempos de llegada de autobús" width="250">
-  <img src=".github/screenshots/bus-arrivals-large-text.png" alt="Detalle con tamaño de texto de accesibilidad" width="250">
 </p>
 
 ## Organización y decisiones
